@@ -1,9 +1,16 @@
-/**
- * @format
- */
+import { AppRegistry } from "react-native";
+import name from "./app.json";
+import App from "./App";
+import { enableExperimentalWebImplementation } from "react-native-gesture-handler";
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => App);
+enableExperimentalWebImplementation(true);
+
+
+AppRegistry.registerComponent(name, () => App);
+
+
+AppRegistry.runApplication(name, {
+ initialProps: {},
+ rootTag: document.getElementById("app-root"),
+});
