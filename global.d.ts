@@ -47,3 +47,11 @@ type TelegramWebapp = {
     close: () => void;
     HapticFeedback: TelegramHapticFeedback;
 };
+
+type Window = {
+    Telegram?: {
+        WebApp: TelegramWebapp;
+    };
+};
+
+declare var window: Window;
