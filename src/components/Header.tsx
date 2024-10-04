@@ -1,8 +1,44 @@
-import { StyleSheet } from "react-native";
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { config } from "@/config";
 
 type HeaderProps = {
     amount: number;
+};
+
+export const Header: React.FC<HeaderProps> = ({ amount }) => {
+    const insets = useSafeAreaInsets();
+    const paddingTop = Math.max(20, insets.top);
+    const { username, photo_url } = config().initDataUnsafe.user;
+    return (
+        <View style={[styles.header, { paddingTop }]}>
+            <View style={styles.amountRow}>
+                <Image
+                source={require("../../assets/icons/coin.png")}
+                style={{ height: 40, width: 40 }}
+                />            
+                <Text style={styles.text}>{amount}</Text>
+            </View>
+            <View style={styles.userInfo}>
+                <Text style={styles.username}>@{username}</Text>
+                {photo_url ? (
+                    <Image
+                    style={[styles.image, { backgroundColor: "transparent" }]}
+                    source={{
+                        uri: photo_url,
+                    }}></Image>
+                ) : (
+                <View style={styles.image}>
+                    <Image
+                    style={styles.icon}
+                    source={require("../../assets/icons/profile-placeholder.png")}
+                    />
+                </View>
+                )}
+            </View>
+       </View>
+    );
 };
 
 const styles = StyleSheet.create({
