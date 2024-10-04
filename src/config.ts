@@ -1,3 +1,6 @@
+import { Platform } from "react-native";
+
+
 export const MockConfig = {
     themeParams: {
         bg_color: "#000",
@@ -26,3 +29,16 @@ export const MockConfig = {
         },
     },
 } as TelegramWebapp;
+
+
+export const config = () => {
+    if (Platform.OS !== "web") {
+        return MockConfig;
+    }
+    
+    if (window.Telegram?.WebApp.initData) {
+        return window.Telegram?.WebApp;
+    } else {
+        return MockConfig;
+    }
+};
