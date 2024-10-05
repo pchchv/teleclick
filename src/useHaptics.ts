@@ -8,12 +8,12 @@ import {
 } from 'expo-haptics';
 
 type Haptics = {
-  impactOccurred: (style: ImpactFeedbackStyle) => Promise;
-  notificationOccurred: (type: NotificationFeedbackType) => Promise;
+  impactOccurred: (style: ImpactFeedbackStyle) => Promise<void>;
+  notificationOccurred: (type: NotificationFeedbackType) => Promise<void>;
 };
 
 export const useHaptics = () => {
-  const [haptics, setHaptics] = useState({
+  const [haptics, setHaptics] = useState<Haptics>({
     impactOccurred: async _ => {},
     notificationOccurred: async _ => {},
   });
