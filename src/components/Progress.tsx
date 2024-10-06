@@ -1,9 +1,28 @@
-import {StyleSheet} from 'react-native';
-import { config } from '@/config';
+import {StyleSheet, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {config} from '@/config';
 
 type ProgressProps = {
   max?: number;
   amount: number;
+};
+
+export const Progress: React.FC<ProgressProps> = ({ max = 3500, amount }) => {
+  const [width, setWidth] = useState(0);
+  return (
+  <View
+    style={styles.container}
+    onLayout={e => setWidth(e.nativeEvent.layout.width)}>
+      <Text style={[styles.text, { width }]}>
+        {amount} / {max}
+      </Text>
+      <View style={[styles.progress, { width: (amount / max) * width }]}>
+        <Text style={[styles.text, styles.progressText, { width }]}>
+          {amount} / {max}
+        </Text>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
